@@ -59,7 +59,6 @@ public class disconnectFour extends Player {
       int maxEval = MIN_VAL;
       for(int i=0; i < board.getConfig().getWidth(); i++){
         Board b = new Board(board, i, maximisingPlayer ? this.getCounter() : this.getCounter().getOther());
-        System.out.println(b);
         int new_score = minimax(b, depth - 1, alpha, beta, false);
         maxEval = Math.max(maxEval, new_score);
         alpha = Math.max(alpha, maxEval);
