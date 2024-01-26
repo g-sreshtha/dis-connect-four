@@ -28,7 +28,7 @@ public class disconnectFour extends Player {
 
 
     int bestScore = MIN_VAL;
-    int depth = 3;
+    int depth = 7;
     int bestMove= -1;
 
     for(int i=0; i < board.getConfig().getWidth(); i++){
@@ -59,12 +59,13 @@ public class disconnectFour extends Player {
       int maxEval = MIN_VAL;
       for(int i=0; i < board.getConfig().getWidth(); i++){
         Board b = new Board(board, i, maximisingPlayer ? this.getCounter() : this.getCounter().getOther());
+        System.out.println(b);
         int new_score = minimax(b, depth - 1, alpha, beta, false);
         maxEval = Math.max(maxEval, new_score);
-//        alpha = Math.max(alpha, maxEval);
-//        if (alpha >= beta){
-//        break;
-//        }
+        alpha = Math.max(alpha, maxEval);
+        if (alpha >= beta){
+        break;
+        }
       } return maxEval;
 
     }else{
@@ -73,10 +74,10 @@ public class disconnectFour extends Player {
         Board bo = new Board(board, i, maximisingPlayer ? this.getCounter() : this.getCounter().getOther());
         int new_score = minimax(bo, depth-1, alpha, beta, true);
         minEval = Math.min(minEval, new_score);
-//        beta = Math.min(beta, minEval);
-//        if(alpha >= beta){
-//          break;
-//        }
+        beta = Math.min(beta, minEval);
+        if(alpha >= beta){
+          break;
+        }
       }return minEval;
     }
 
@@ -126,7 +127,7 @@ public class disconnectFour extends Player {
       }
     }
 
-    for(int row=0; row< board.getConfig().getHeight() - 3; row++){ //may need to change the -3 and the -4
+    for(int row=0; row< board.getConfig().getHeight() - 3; row++){
       for(int col=0; col < board.getConfig().getHeight() - 3; col++){
         int tempScore = calcScorePos(board, row, col, 1, 1);
         decsDiagPoint += tempScore;
