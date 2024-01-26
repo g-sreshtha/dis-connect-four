@@ -5,12 +5,12 @@ import com.thg.accelerator23.connectn.ai.sreshtha.analysis.BoardAnalyser;
 import com.thg.accelerator23.connectn.ai.sreshtha.analysis.GameState;
 
 
-public class disconnectFour extends Player {
+public class FourChan extends Player {
 
   public final int MAX_VAL= Integer.MAX_VALUE;
   public final int MIN_VAL= Integer.MIN_VALUE;
-  public disconnectFour(Counter counter) {
-    super(counter, disconnectFour.class.getName());
+  public FourChan(Counter counter) {
+    super(counter, FourChan.class.getName());
   }
   // alpha is constantly 16??
   @Override
@@ -56,28 +56,28 @@ public class disconnectFour extends Player {
     }
 
     if(maximisingPlayer){
-      int maxEval = MIN_VAL;
+      int max = MIN_VAL;
       for(int i=0; i < board.getConfig().getWidth(); i++){
         Board b = new Board(board, i, maximisingPlayer ? this.getCounter() : this.getCounter().getOther());
         int new_score = minimax(b, depth - 1, alpha, beta, false);
-        maxEval = Math.max(maxEval, new_score);
-        alpha = Math.max(alpha, maxEval);
+        max = Math.max(max, new_score);
+        alpha = Math.max(alpha, max);
         if (alpha >= beta){
         break;
         }
-      } return maxEval;
+      } return max;
 
     }else{
-      int minEval = MAX_VAL;
+      int min = MAX_VAL;
       for(int i=0; i< board.getConfig().getWidth(); i++){
         Board bo = new Board(board, i, maximisingPlayer ? this.getCounter() : this.getCounter().getOther());
         int new_score = minimax(bo, depth-1, alpha, beta, true);
-        minEval = Math.min(minEval, new_score);
-        beta = Math.min(beta, minEval);
+        min = Math.min(min, new_score);
+        beta = Math.min(beta, min);
         if(alpha >= beta){
           break;
         }
-      }return minEval;
+      }return min;
     }
 
   }
