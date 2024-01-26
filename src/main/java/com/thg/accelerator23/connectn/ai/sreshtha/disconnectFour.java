@@ -28,7 +28,7 @@ public class disconnectFour extends Player {
 
 
     int bestScore = MIN_VAL;
-    int depth = 7;
+    int depth = 5;
     int bestMove= -1;
 
     for(int i=0; i < board.getConfig().getWidth(); i++){
